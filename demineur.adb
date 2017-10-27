@@ -196,7 +196,12 @@ procedure Demineur_Skel is
 		-- Si case a zéro voisins minés, retourne 0		
 		return (Board(Li, Co) = 0);
 	end Calculer_Bombes;
-   
+	
+	function Est_Hors_Tab(Board : in T_Board; Li, Co : in Integer) return Boolean is
+	begin
+		return not (Li > 0 and Co > 0 and Li <= Board'Length(1) and Co > 0 and Co <= Board'Length(2));
+	end Est_Hors_Tab;
+	
 	-- <Procedure> Ouvrir_Case
 	--  Ouvre la case dans <Visibilite> et lance Calculer_Bombes
 	procedure Ouvrir_Case(Visibilite, Flags : in out T_Display; 
@@ -242,30 +247,25 @@ procedure Demineur_Skel is
    
 	-- <Procedure> Placer_Drapeau
 	--  Pose ou enlève un drapeau dans <Flags>	
-	procedure Placer_Drapeau(Nb_Drapeaux : in out Integer; Visibilite, Flags : in out T_Display;						
-						Li, Co : in Integer) is 
+	procedure Placer_Drapeau(Nb_Drapeaux : in out Integer; 
+				Visibilite, Flags : in out T_Display; Li, Co : in Integer) is 
+		MaxLi : Integer := Visibilite'Length(1);
+		MaxCo : Integer := Visibilite'Length(2);
 	begin
-			if not Case_Ouverte(Visibilite, Li, Co) then
-				-- Si la case a déjà un drapeau
-				if Case_A_Drapeau(Flags, Li, Co) then
-					Flags(Li, Co) := False;
-					Nb_Drapeaux := Nb_Drapeaux + 1;
-				else
-					-- Si le nb de drapeau est > 0
-					if Nb_Drapeaux > 0 then
-						-- Ajouter un drapeau
-						Flags(Li, Co) := True;
-						Nb_Drapeaux := Nb_Drapeaux - 1;
-					else
-						Put("/!\ Maximum de drapeaux utilisés /!\");
-						New_Line;
-					end if;
-				end if;
+		if not Case_Ouverte(Visibilite, Li, Co) then
+			-- Si la case a déjà un drapeau
+			if Case_A_Drapeau(Flags, Li, Co) then
+				Flags(Li, Co) := False;
+				Nb_Drapeaux := Nb_Drapeaux + 1;
 			else
-				Put("/!\ Case déjà ouverte /!\");
-				New_Line;
+				-- Si le nb de drapeau est > 0
+				if Nb_Drapeaux > 0 then
+					-- Ajouter un drapeau
+					Flags(Li, Co) := True;
+					Nb_Drapeaux := Nb_Drapeaux - 1;
+				end if;
 			end if;
-			
+		end if;
 	end Placer_Drapeau;
 	
 	-- <Function> Partie_Gagnee
@@ -351,8 +351,10 @@ begin -- Demineur
             Get(Co);
             --------------------
             -- à compléter!!! --
-			Placer_Drapeau(Nb_Drapeaux, Visibilite, Flags, Li, Co);
-			Gagne := Partie_Gagnee(Visibilite, Nb_Bombes, Nb_Drapeaux);
+			if  not Est_Hors_Tab(Board, Li, Co) then
+				Placer_Drapeau(Nb_Drapeaux, Visibilite, Flags, Li, Co);
+				Gagne := Partie_Gagnee(Visibilite, Nb_Bombes, Nb_Drapeaux);
+			end if;
             --------------------
          -- Ouvrir une case / perdu si elle contient une bombe
          when 2 =>  
@@ -362,13 +364,16 @@ begin -- Demineur
             --------------------
             -- à compléter!!! --
 			-- Si la case ouverte est minée -> fin de la partie
-			if Case_Minee(Board, Li, Co) then
-				Perdu := true;
-			else
-				-- Sinon, ouvrir la case 
-				Ouvrir_Case(Visibilite, Flags, Board, Li, Co);
-				Gagne := Partie_Gagnee(Visibilite, Nb_Bombes, Nb_Drapeaux);
+			if  not Est_Hors_Tab(Board, Li, Co) then
+				if Case_Minee(Board, Li, Co) then
+					Perdu := true;
+				else
+					-- Sinon, ouvrir la case 
+					Ouvrir_Case(Visibilite, Flags, Board, Li, Co);
+					Gagne := Partie_Gagnee(Visibilite, Nb_Bombes, Nb_Drapeaux);
+				end if;
 			end if;
+			
             --------------------
          -- Choix non-valides   
          when others => Put("Choix indéfini!");

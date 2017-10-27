@@ -1,0 +1,220 @@
+V "GNAT Lib v2017"
+M P W=b
+P SS ZX
+
+RN
+RV NO_CALENDAR
+RV NO_DELAY
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_FIXED_POINT
+RV NO_FLOATING_POINT
+RV NO_IO
+RV NO_RECURSION
+RV NO_SECONDARY_STACK
+RV NO_DEFAULT_INITIALIZATION
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV SPARK_05
+
+U demineur_skel%b	demineur.adb		30308ee8 NE OO SU
+W ada%s			ada.ads			ada.ali
+W ada.calendar%s	a-calend.adb		a-calend.ali
+W ada.command_line%s	a-comlin.adb		a-comlin.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.numerics%s	a-numeri.ads		a-numeri.ali
+W ada.numerics.float_random%s  a-nuflra.adb	a-nuflra.ali
+W ada.numerics.generic_elementary_functions%s
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W interfaces%s		interfac.ads		interfac.ali
+W system.concat_2%s	s-conca2.adb		s-conca2.ali
+W system.concat_4%s	s-conca4.adb		s-conca4.ali
+W system.img_int%s	s-imgint.adb		s-imgint.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.val_int%s	s-valint.adb		s-valint.ali
+
+D ada.ads		20170516105950 76789da1 ada%s
+D a-calend.ads		20170516105954 2d5f01d4 ada.calendar%s
+D a-comlin.ads		20170516105952 4aa66568 ada.command_line%s
+D a-except.ads		20170516105952 291912d5 ada.exceptions%s
+D a-inteio.ads		20170516105954 f64b89a4 ada.integer_text_io%s
+D a-ioexce.ads		20170516105948 e4a01f64 ada.io_exceptions%s
+D a-numeri.ads		20170516105950 bb51c45a ada.numerics%s
+D a-numaux.ads		20170516105954 243fe0b7 ada.numerics.aux%s
+D a-nuflra.ads		20170516105950 4056ab7a ada.numerics.float_random%s
+D a-ngelfu.ads		20170516105954 7e738940 ada.numerics.generic_elementary_functions%s
+D a-ngelfu.adb		20170516105952 a9022048 ada.numerics.generic_elementary_functions%b
+D a-stream.ads		20170516105952 119b8fb3 ada.streams%s
+D a-tags.ads		20170516105954 d3a89129 ada.tags%s
+D a-textio.ads		20170516105954 386df5d4 ada.text_io%s
+D a-tiinio.ads		20170516105950 aa04e5d6 ada.text_io.integer_io%s
+D a-unccon.ads		20170516105954 31484697 ada.unchecked_conversion%s
+D demineur.adb		20171027172102 a7cab41e demineur_skel%b
+D interfac.ads		20170516105950 5ab55268 interfaces%s
+D i-cstrea.ads		20170516105950 e53d8b8e interfaces.c_streams%s
+D system.ads		20170516105954 32a08138 system%s
+D s-conca2.ads		20170516105952 02a0d7d0 system.concat_2%s
+D s-conca4.ads		20170516105954 7e642b20 system.concat_4%s
+D s-crtl.ads		20170516105948 0ebbdb71 system.crtl%s
+D s-exctab.ads		20170516105954 54135002 system.exception_table%s
+D s-ficobl.ads		20170516105956 078245e4 system.file_control_block%s
+D s-imgint.ads		20170516105950 02dbe0c2 system.img_int%s
+D s-parame.ads		20170516105954 7e2a0d7f system.parameters%s
+D s-rannum.ads		20170516105952 99ade2f2 system.random_numbers%s
+D s-secsta.ads		20170516105954 9751b57e system.secondary_stack%s
+D s-soflin.ads		20170516105950 14e1eb6c system.soft_links%s
+D s-stache.ads		20170516105954 a37c21ec system.stack_checking%s
+D s-stalib.ads		20170516105954 09bd3940 system.standard_library%s
+D s-stoele.ads		20170516105956 2dc34a04 system.storage_elements%s
+D s-traent.ads		20170516105950 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20170516105952 34867c83 system.unsigned_types%s
+D s-valint.ads		20170516105952 48a52a3f system.val_int%s
+D s-wchcon.ads		20170516105954 1b7d22d2 system.wch_con%s
+X 1 ada.ads
+16K9*Ada 20e8 17|7r6 7r23 8r6 8r28 9r6 9r31 11r6 11r37 12r6 13r6 13r24
+X 2 a-calend.ads
+36K13*Calendar 395e17 17|13w10 13r28
+44I9*Time<213I9>
+56O12*Day_Duration{duration}
+58V13*Clock{44I9} 17|336s29 388s32
+69V13*Seconds{56O12} 17|336s21 388s24
+213I9 Time_Rep<long_long_integer>
+X 3 a-comlin.ads
+36K13*Command_Line 144e21 17|8w10 8r32
+39V13*Argument_Count{natural} 17|62s30 326s8 330s21
+52V13*Argument{string} 17|63s45 64s45 295s37 295s67
+X 5 a-inteio.ads
+18K13*Integer_Text_IO[15|46] 17|9w10 9r35
+X 7 a-numeri.ads
+16K13*Numerics 32e17 17|11r10 11r41 12r10
+X 9 a-nuflra.ads
+41K22*Float_Random 74e30 17|11w19 11r50
+47R9*Generator<28|63R9> 17|20r10
+49F12*Uniformly_Distributed{float}
+51V13*Random{49F12}<28|71p13> 17|87s51 88s51
+X 10 a-ngelfu.ads
+39k22*Generic_Elementary_Functions 172e46 17|12w19
+X 14 a-textio.ads
+49K13*Text_IO 471e16 17|7w10 7r27
+52P9*File_Type
+119V13*Standard_Error{52P9} 17|36s16 41s20 44s23 46s23 50s19 52s16
+241U14*Put 17|41s16 46s19
+242U14*Put 17|32s7 44s53 325s4 342s7 349s13 361s13 379s25
+259U14*Put_Line 17|36s7 50s10 52s7
+263U14*Put_Line 17|320s4 331s7 385s7 387s7 389s7 391s7 394s4
+X 15 a-tiinio.ads
+56U14*Get 17|327s7[5|18] 343s7[5|18] 350s13[5|18] 351s13[5|18] 362s13[5|18]
+. 363s13[5|18]
+60U14*Put 17|44s19[5|18]
+66U14*Put 17|34s10[5|18] 38s10[5|18]
+X 17 demineur.adb
+15U11*Demineur_Skel 15b11 398l5 398t18
+17A9 T_Board(integer)<integer><integer> 30r35 59r47 77r47 108r44 135r49 200r42
+. 208r72 295r12
+19A9 T_Display(boolean)<integer><integer> 29r47 117r47 126r44 207r58 251r60
+. 274r48 299r24
+20r4 Gen{9|47R9} 87r58 88r58
+29U14 Affichage 29b14 29>24 29>36 30>24 53l8 53t17 338s4 381s7 397s4
+29a24 Visibilite{19A9} 33r16 37r16 39r19 43r19
+29a36 Flags{19A9} 40r16
+30a24 Board{17A9} 44r38
+33i11 J{integer} 34r14
+37i11 I{integer} 38r14 40r22 43r30 44r44
+39i14 J{integer} 40r24 43r32 44r46
+59U19 Poser_Bombes 59b19 59=32 72l13 72t25 332s7
+59a32 Board{17A9} 67m25
+60i17 Li{integer} 63m25 67r31
+60i20 Co{integer} 64m25 67r35
+62i21 I{integer} 63r56 64r56
+77U19 Poser_Bombes 77b19 77=32 77=56 100l13 100t25 328s7
+77a32 Board{17A9} 82r25 83r25 91r28 92m33
+77i56 Nb{natural} 85r23 94m33 94r39
+78i17 NbLi{integer} 82m17 87r45
+78i23 NbCo{integer} 83m17 88r45
+79i17 Li{integer} 87m25 91r34 92r39
+79i21 Co{integer} 88m25 91r38 92r43
+80i17 cpt{integer}
+108V18 Case_Minee{boolean} 108b18 108=29 109>57 109>61 112l13 112t23 214s24
+. 368s36
+108a29 Board{17A9} 111r24
+109i57 Li{integer} 111r30
+109i61 Co{integer} 111r34
+117V18 Case_Ouverte{boolean} 117b18 117>31 117>58 117>62 121l13 121t25 214s58
+. 255s24
+117a31 Visibilite{19A9} 120r24
+117i58 Li{integer} 120r35
+117i62 Co{integer} 120r39
+126V18 Case_A_Drapeau{boolean} 126b18 126>33 126>55 126>59 130l13 130t27
+. 215s33 257s28
+126a33 Flags{19A9} 129r24
+126i55 Li{integer} 129r30
+126i59 Co{integer} 129r34
+135V18 Calculer_Bombes{boolean} 135b18 135=34 135>58 135>62 198l13 198t28
+. 218s36
+135a34 Board{17A9} 138r36 139r36 143r28 144m33 144r50 150r28 151m33 151r50
+. 157r28 158m33 158r50 164r28 165m33 165r50 171r28 172m33 172r50 178r28 179m33
+. 179r50 185r28 186m33 186r50 192r28 193m33 193r50 197r25
+135i58 Li{integer} 143r34 144r39 144r56 150r34 151r39 151r56 155r20 157r34
+. 158r39 158r56 162r20 164r34 165r39 165r56 169r35 171r34 172r39 172r56 176r40
+. 178r34 179r39 179r56 183r20 185r34 186r39 186r56 190r35 192r34 193r39 193r56
+. 197r31
+135i62 Co{integer} 141r20 143r38 144r43 144r60 148r20 150r38 151r43 151r60
+. 157r42 158r43 158r60 164r42 165r43 165r60 169r20 171r42 172r43 172r60 176r20
+. 178r42 179r43 179r60 183r35 185r42 186r43 186r60 190r20 192r42 193r43 193r60
+. 197r35
+137i17 Bombe{integer} 143r48 150r48 157r48 164r48 171r52 178r52 185r52 192r52
+138i17 MaxLi{integer} 162r30 176r50
+139i17 MaxCo{integer} 148r30 176r30 183r45 190r45
+200V18 Est_Hors_Tab{boolean} 200b18 200>31 200>51 200>55 203l13 203t25 354s33
+. 367s33
+200a31 Board{17A9} 202r57 202r94
+200i51 Li{integer} 202r29 202r51
+200i55 Co{integer} 202r40 202r77 202r88
+207U19 Ouvrir_Case 207b19 207=31 207=43 208=57 209>57 209>61 221s49 224s49
+. 227s49 230s49 233s49 236s49 239s49 242s49 246l13 246t24 372s41
+207a31 Visibilite{19A9} 214r71 216m33 221m61 224m61 227m61 230m61 233m61
+. 236m61 239m61 242m61
+207a43 Flags{19A9} 215r48 221m73 224m73 227m73 230m73 233m73 236m73 239m73
+. 242m73
+208a57 Board{17A9} 210r36 211r36 214m35 214r35 218m52 218r52 221m80 224m80
+. 227m80 230m80 233m80 236m80 239m80 242m80
+209i57 Li{integer} 214r42 214r83 215r55 216r44 218r59 221r87 224r87 226r44
+. 227r87 229r44 230r87 232r59 233r87 235r64 236r87 238r64 239r87 241r59 242r87
+209i61 Co{integer} 214r46 214r87 215r59 216r48 218r63 220r44 221r91 223r44
+. 224r91 227r95 230r95 232r44 233r95 235r44 236r95 238r44 239r95 241r44 242r95
+210i17 MaxLi{integer} 226r54 235r74 241r69
+211i17 MaxCo{integer} 220r54 235r54 238r54
+250U19 Placer_Drapeau 250b19 250=34 251=33 251=45 251>71 251>75 269l13 269t27
+. 355s33
+250i34 Nb_Drapeaux{integer} 259m33 259r48 262r36 265m41 265r56
+251a33 Visibilite{19A9} 252r36 253r36 255r37
+251a45 Flags{19A9} 257r43 258m33 264m41
+251i71 Li{integer} 255r49 257r50 258r39 264r47
+251i75 Co{integer} 255r53 257r54 258r43 264r51
+252i17 MaxLi{integer}
+253i17 MaxCo{integer}
+274V18 Partie_Gagnee{boolean} 274b18 274>32 274>59 275>57 290l13 290t26 356s42
+. 373s50
+274a32 Visibilite{19A9} 276r42 276r63 280r26 281r34 282r36
+274i59 Nb_Bombes{integer} 289r84
+275i57 Nb_Drapeaux{integer} 289r25
+276i17 Total_Cases{integer} 289r70
+277i17 Total_Cases_Ouvertes{integer} 283m41 283r65 289r47
+280i21 I{integer} 282r47
+281i29 J{integer} 282r50
+295a4 Board{17A9} 299r34 299r49 302r20 303r20 321r25 323r25 328m20 328r20
+. 332m20 332r20 338r31 354r46 367r46 368m47 368r47 372m72 372r72 381r34 397r31
+299a4 Visibilite{19A9} 338r14 355m61 355r61 356r56 372m53 372r53 373r64 381r17
+. 395m4 397r14
+299a16 Flags{19A9} 338r25 355m73 355r73 372m65 372r65 381r28 396m4 397r25
+302i4 Li{integer} 350m17 354r53 355r80 362m17 367r53 368r54 372r79
+303i4 Co{integer} 351m17 354r57 355r84 363m17 367r57 368r58 372r83
+305i4 Nb_Bombes{natural} 327m11 328m26 328r26 330m7 331r30 335r19 356r68
+. 373r76
+305i15 Nb_Drapeaux{natural} 335m4 355m48 355r48 356r79 373r87
+307b4 Gagne{boolean} 356m33 373m41 382r18 386r10
+307b11 Perdu{boolean} 369m41 382r27 390r10
+307b18 Abandon{boolean} 346m20 382r37 384r7
+309i4 Start{integer} 336m4 388r42
+309i11 Temps{integer} 388m7 389r47
+311i4 Choix{natural} 343m11 344r12
+
