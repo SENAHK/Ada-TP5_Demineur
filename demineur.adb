@@ -1,3 +1,9 @@
+--AUTEUR:	Ramusi Michael
+--SECTION:	ITI 1ère année
+--DATE:		Octobre-Novembre 2017
+--COURS:	Labo prog
+--PROJET:	TP5 - Démineur
+
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Command_line; use Ada.Command_Line;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
@@ -95,24 +101,37 @@ procedure Demineur_Skel is
 ------------------------------------------------------------------------- 
    ----------------------------------------------------  
    -- Placer ici vos autres procédures et fonctions --
-   function Case_Minee(Board : in out T_Board;
+   
+	-- <Function> Case_Minee
+	-- permet de savoir si la case dans <Board> est minée
+	-- retourne boolean
+	function Case_Minee(Board : in out T_Board;
 							Li, Co : in Integer) return Boolean is  
 	begin		
 		return Board(Li, Co) = -1;
 	end Case_Minee;
 	
+	-- <Function> Case_Ouverte
+	-- permet de savoir si la case dans <Visibilite> est ouverte 
+	-- <Returns> retourne boolean	
 	function Case_Ouverte(Visibilite : in T_Display; Li, Co : in Integer)
 							return Boolean is
 	begin
 		return Visibilite(Li, Co);
 	end Case_Ouverte;
-	
+
+	-- <Function> Case_A_Drapeau
+	-- permet de savoir si la case dans <Flags> a un drapeau
+	-- <Returns> boolean	
 	function Case_A_Drapeau(Flags : in T_Display; Li, Co : in Integer)
 							return Boolean is
 	begin
 		return Flags(Li, Co);
 	end Case_A_Drapeau;
 	
+	-- <Function> Calculer_Bombes
+	--  calcule le nombre de bombes dans les cases voisines
+	-- <Returns> boolean
 	function Calculer_Bombes(Board : in out T_Board; Li, Co : in Integer) 
 														return boolean is
 		Bombe : Integer := -1;
@@ -174,22 +193,25 @@ procedure Demineur_Skel is
 				Board(Li, Co) := Board(Li, Co) + 1;
 			end if;
 		end if;	
-				
+		-- Si case a zéro voisins minés, retourne 0		
 		return (Board(Li, Co) = 0);
 	end Calculer_Bombes;
    
-   
+	-- <Procedure> Ouvrir_Case
+	--  Ouvre la case dans <Visibilite> et lance Calculer_Bombes
 	procedure Ouvrir_Case(Visibilite, Flags : in out T_Display; 
 							Board : in out T_Board;			
 							Li, Co : in Integer) is
 		MaxLi : Integer := Board'Length(1);
 		MaxCo : Integer := Board'Length(2);
 	begin
-		
+		-- Si la case n'est ni minée ni ouverte ni flag-é
 		if not Case_Minee(Board, Li, Co) and not Case_Ouverte(Visibilite, Li, Co) 
 			and not Case_A_Drapeau(Flags, Li, Co) then
 				Visibilite(Li, Co) := True;
+				-- Si la case n'a pas de mines aux alentours
 				if Calculer_Bombes(Board, Li, Co)  then
+					-- Ouvrir_Case pour les 8 voisins
 					if(Co + 1 <= MaxCo) then
 						Ouvrir_Case(Visibilite, Flags, Board, Li, Co + 1);
 					end if;
@@ -218,17 +240,20 @@ procedure Demineur_Skel is
 		end if;
 	end Ouvrir_Case;
    
-	
-	
+	-- <Procedure> Placer_Drapeau
+	--  Pose ou enlève un drapeau dans <Flags>	
 	procedure Placer_Drapeau(Nb_Drapeaux : in out Integer; Visibilite, Flags : in out T_Display;						
 						Li, Co : in Integer) is 
 	begin
 			if not Case_Ouverte(Visibilite, Li, Co) then
+				-- Si la case a déjà un drapeau
 				if Case_A_Drapeau(Flags, Li, Co) then
 					Flags(Li, Co) := False;
 					Nb_Drapeaux := Nb_Drapeaux + 1;
 				else
+					-- Si le nb de drapeau est > 0
 					if Nb_Drapeaux > 0 then
+						-- Ajouter un drapeau
 						Flags(Li, Co) := True;
 						Nb_Drapeaux := Nb_Drapeaux - 1;
 					else
@@ -243,12 +268,15 @@ procedure Demineur_Skel is
 			
 	end Placer_Drapeau;
 	
+	-- <Function> Partie_Gagnee
+	-- 	permet de savoir quand le joueur a gagné
+	-- <Returns> boolean	
 	function Partie_Gagnee(Visibilite : in T_Display; Nb_Bombes : in Integer; 
 							Nb_Drapeaux : in Integer) return Boolean is
 		Total_Cases : Integer := Visibilite'Length(1)*Visibilite'Length(2);
 		Total_Cases_Ouvertes : Integer := 0;
 	begin
-	
+		-- Boucle qui calcul le nombre de cases ouvertes
 		for I in Visibilite'Range(2) loop
 			for J in Visibilite'Range(1) loop
 				if Visibilite(I, J) then
@@ -257,8 +285,8 @@ procedure Demineur_Skel is
 			end loop;
 		end loop;
 		
+		-- Victoire vraie si: flags sur cases minées et cases non-minées ouvertes
 		return (Nb_Drapeaux = 0) and (Total_Cases_Ouvertes = Total_Cases - Nb_Bombes);
-
 	end Partie_Gagnee;
    ----------------------------------------------------
 -------------------------------------------------------------------------
@@ -333,9 +361,11 @@ begin -- Demineur
             Get(Co);
             --------------------
             -- à compléter!!! --
+			-- Si la case ouverte est minée -> fin de la partie
 			if Case_Minee(Board, Li, Co) then
 				Perdu := true;
 			else
+				-- Sinon, ouvrir la case 
 				Ouvrir_Case(Visibilite, Flags, Board, Li, Co);
 				Gagne := Partie_Gagnee(Visibilite, Nb_Bombes, Nb_Drapeaux);
 			end if;
